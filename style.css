@@ -1,17 +1,56 @@
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
-    height: 100%;
-  }
-  
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
+#map {
+  height: 100%;  /* Makes sure the map fills its parent container fully */
+  width: 100%;
+  position: relative;  /* Relative positioning allows buttons to be correctly placed on the map */
+}
+
+/* Make the entire sample page fill the window */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling when using full-page elements */
+  font-family: Arial, sans-serif;  /* Adding a global font style */
+}
+
+/* Container for interactive hotspots over the map */
+.campus-map {
+  position: absolute;  /* Position the hotspots div over the map */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;  /* Allows interaction with Google Maps while buttons still work */
+}
+
+/* Styling for each interactive hotspot button */
+.hotspot {
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.7);  /* Semi-transparent red background */
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;  /* Allows buttons to be clickable */
+}
+
+/* Information box that pops up when a button is clicked */
+.info-box {
+  display: none;  /* Hidden by default, shown when a button is clicked */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;  /* Higher z-index to make sure it appears over other elements */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Button to close the information box */
+.info-box button {
+  margin-top: 10px;
+  cursor: pointer;
+}

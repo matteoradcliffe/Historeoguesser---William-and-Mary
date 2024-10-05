@@ -1,23 +1,32 @@
-<html></html>
-  <head>
-    <title>Street View Controls</title>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Street View Controls with Interactive Hotspots</title>
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <script type="module" src="./index.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <div id="map"></div>
 
-    <!-- 
-      The `defer` attribute causes the script to execute after the full HTML
-      document has been parsed. For non-blocking uses, avoiding race conditions,
-      and consistent behavior across browsers, consider loading using Promises. See
-      https://developers.google.com/maps/documentation/javascript/load-maps-js-api
-      for more information.
-      -->
+    <!-- Interactive Hotspots -->
+    <div class="campus-map">
+        <button class="hotspot" style="top: 40%; left: 30%;" onclick="showInfo('Library')">Library</button>
+        <button class="hotspot" style="top: 60%; left: 50%;" onclick="showInfo('Science Building')">Science Building</button>
+        <button class="hotspot" style="top: 20%; left: 70%;" onclick="showInfo('Student Center')">Student Center</button>
+    </div>
+
+    <!-- Information Box -->
+    <div id="infoBox" class="info-box">
+        <p id="buildingInfo"></p>
+        <button onclick="closeInfo()">Close</button>
+    </div>
+
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjckgBX1rkxIW7bYHtj_aV6jFYBqqZ34&callback=initPano&v=weekly"
-      defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjckgBX1rkxIW7bYHtj_aV6jFYBqqZ34&callback=initPano&v=weekly"
+        defer
     ></script>
-  </body>
+    <script src="./interactive.js" defer></script>
+    <script src="./index.js" defer></script> <!-- Including the script that initializes Street View -->
+</body>
 </html>

@@ -1,22 +1,24 @@
-let guess_location
-let random_location
+const pois = [
+    {lat: 37.2702364, lng: -76.7144971}, //ISC
+    {lat: 37.2712101, lng: -76.7195004}, //Pleasants
+    {lat: 37.272925, lng: -76.7143516}, //Zable
+    {lat: 37.2718334, lng: -76.7134909}, //Sadler
+    {lat: 37.2708312, lng: -76.7073767} //DoG
+]
 
+let guess_location;
+let random_location;
+
+let markers = [];
+let map;
 
 async function initialize() {
-    
-    const pois = [
-         {lat: 37.2702364, lng: -76.7144971}, //ISC
-          {lat: 37.2712101, lng: -76.7195004}, //Pleasants
-          {lat: 37.272925, lng: -76.7143516}, //Zable
-          {lat: 37.2718334, lng: -76.7134909}, //Sadler
-          {lat: 37.2708312, lng: -76.7073767} //DoG
-    ]
 
-    const random_location = pois[Math.floor((Math.random() * (pois.length)))]
+    randomize_location()
 
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-    
+
     const myLatLng = { lat: 37.2706829, lng: -76.7159741 };
     const map = new Map(document.getElementById("minimap"), {
         center: myLatLng,
@@ -32,25 +34,24 @@ async function initialize() {
         position: { lat: 37.2706829, lng: -76.7159741 },
     });
     
-    const panorama = new google.maps.StreetViewPanorama(
+    let panorama = new google.maps.StreetViewPanorama(
         document.getElementById("map"),
-          {
-            
+          {  
             position: random_location,
-        
-            zoomControlOptions: {
-                position: google.maps.ControlPosition.TOP_LEFT,
-              },
             linksControl: false,
             panControl: true,
             enableCloseButton: false,
             fullscreenControl: false,
             addressControl: false,
             showRoadLabels: false,
-            clickToGo: false
+            clickToGo: false,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.TOP_LEFT,
+            }
             
           },
     );
+    
 
     map.addListener("click", (mapsMouseEvent) => {
         marker.setMap(null)
@@ -60,10 +61,8 @@ async function initialize() {
             position: mapsMouseEvent.latLng
             
         });
-        
+        markers.push(marker);
     });
-    
-
 }
 
 function calculate_distance() {
@@ -79,6 +78,15 @@ function calculate_distance() {
     
 }
 
+function randomize_location() {    
+    random_location = pois[Math.floor((Math.random() * (pois.length)))]
+}
+
+function clear_markers() {
+    markers.forEach(marker => {
+        marker.setMap(null);
+    });
+    markers = [];
+}
+
 initialize();
-
-

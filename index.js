@@ -22,6 +22,7 @@ const map = new Map(document.getElementById("minimap"), {
     streetViewControl: false,
     mapTypeControl: false,
     fullscreenControl: false,
+    zoomControl: false,
     mapId: "4504f8b37365c3d0",
 });
 
@@ -51,6 +52,7 @@ function initialize() {
             addressControl: false,
             showRoadLabels: false,
             clickToGo: false,
+            zoomControl: false,
             zoomControlOptions: {
                 position: google.maps.ControlPosition.TOP_LEFT,
             }
@@ -80,7 +82,6 @@ function initialize() {
         console.log(calculate_distance());
     });
 
-    randomize_location()
 }
 
 function calculate_distance() {

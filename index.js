@@ -7,32 +7,38 @@ const pois = [
 ]
 
 let guess_location;
-let random_location;
+let random_location = pois[Math.floor((Math.random() * (pois.length)))];
 
 let markers = [];
-let map;
 
-async function initialize() {
 
-    randomize_location()
+const { Map } = await google.maps.importLibrary("maps");
+const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
-    const { Map } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+const myLatLng = { lat: 37.2706829, lng: -76.7159741 };
+const map = new Map(document.getElementById("minimap"), {
+    center: myLatLng,
+    zoom: 16,
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: false,
+    mapId: "4504f8b37365c3d0",
+});
 
-    const myLatLng = { lat: 37.2706829, lng: -76.7159741 };
-    const map = new Map(document.getElementById("minimap"), {
-        center: myLatLng,
-        zoom: 16,
-        streetViewControl: false,
-        mapTypeControl: false,
-        fullscreenControl: false,
-        mapId: "4504f8b37365c3d0",
-    });
+let marker = new AdvancedMarkerElement({
+    map,
+    position: { lat: 37.2706829, lng: -76.7159741 },
+});
+markers.push(marker); 
 
-    let marker = new AdvancedMarkerElement({
-        map,
-        position: { lat: 37.2706829, lng: -76.7159741 },
-    });
+let rndmarker = new AdvancedMarkerElement({
+    map: null,
+    position: random_location,
+});
+markers.push(rndmarker); 
+
+function initialize() {
+    clear_markers()
     
     let panorama = new google.maps.StreetViewPanorama(
         document.getElementById("map"),
@@ -51,6 +57,12 @@ async function initialize() {
             
           },
     );
+
+    let rndmarker = new AdvancedMarkerElement({
+        map: null,
+        position: random_location,
+    });
+    
     
 
     map.addListener("click", (mapsMouseEvent) => {
@@ -60,9 +72,15 @@ async function initialize() {
             map,
             position: mapsMouseEvent.latLng
             
-        });
+        });   
+        
+        reveal_location();
         markers.push(marker);
+        console.log(markers)
+            
     });
+
+    randomize_location()
 }
 
 function calculate_distance() {
@@ -87,6 +105,10 @@ function clear_markers() {
         marker.setMap(null);
     });
     markers = [];
+}
+
+function reveal_location() {
+    rndmarker.setMap(map);
 }
 
 initialize();

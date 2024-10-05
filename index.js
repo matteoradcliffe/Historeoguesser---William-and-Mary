@@ -76,8 +76,8 @@ function initialize() {
         
         reveal_location();
         markers.push(marker);
-        console.log(markers)
-            
+        console.log(markers);
+        console.log(calculate_distance());
     });
 
     randomize_location()
@@ -89,12 +89,12 @@ function calculate_distance() {
     var guessLat = guess_location.lat()
     var guessLng = guess_location.lng()
 
-    var metersLat = Math.abs(randomLat - guessLat) * 111.111
-    var metersLng = Math.abs(randomLng - guessLng) * 111.111
+    var dLat = 111.32 * Math.abs(randomLat-guessLat)
+    var dLng = (40075 * Math.cos(randomLat-guessLat) / 360) * (randomLng-guessLng)
+    return 1000*(Math.sqrt(Math.pow(dLat,2) + Math.pow(dLng,2)))
 
-    return Math.sqrt(Math.pow(metersLat, 2) + Math.pow(metersLng, 2))
-    
 }
+
 
 function randomize_location() {    
     random_location = pois[Math.floor((Math.random() * (pois.length)))]

@@ -179,7 +179,14 @@
     position: absolute;
     margin-top: 95px;
     margin-left: -45px;
-  } 
+  }  
+
+.guess {  
+  position: absolute;
+  height: 50px; 
+  width: 100px;
+  margin-left: 50vw;
+}
   
   
    

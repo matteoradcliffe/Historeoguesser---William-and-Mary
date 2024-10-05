@@ -1,21 +1,26 @@
-/**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
-// [START maps_streetview_embed]
-let panorama;
-
-function initialize() {
-  panorama = new google.maps.StreetViewPanorama(
-    document.getElementById("street-view"),
-    {
-      position: { lat: 37.86926, lng: -122.254811 },
-      pov: { heading: 165, pitch: 0 },
-      zoom: 1,
-    },
-  );
-}
-
-window.initialize = initialize;
-// [END maps_streetview_embed]
+function initPano() {
+    // Note: constructed panorama objects have visible: true
+    // set by default.
+    const panorama = new google.maps.StreetViewPanorama(
+    document.getElementById("map"),
+      {
+        
+        position: { lat: 37.2702364, lng: -76.7144971 },
+    
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.BOTTOM_LEFT,
+          },
+        linksControl: false,
+        panControl: true,
+        enableCloseButton: false,
+        fullscreenControl: false,
+        addressControl: false,
+        showRoadLabels: false,
+        clickToGo: false
+        
+        
+      },
+    );
+  }
+  
+  window.initPano = initPano;

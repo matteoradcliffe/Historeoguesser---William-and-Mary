@@ -1,19 +1,12 @@
-<!doctype html>
-<!--
- @license
- Copyright 2019 Google LLC. All Rights Reserved.
- SPDX-License-Identifier: Apache-2.0
--->
-<!-- [START maps_streetview_embed] -->
-<html>
+<html></html>
   <head>
-    <title>Street View Containers</title>
+    <title>Street View Controls</title>
 
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <script type="module" src="./index.js"></script>
   </head>
   <body>
-    <div id="street-view"></div>
+    <div id="map"></div>
 
     <!-- 
       The `defer` attribute causes the script to execute after the full HTML
@@ -23,9 +16,8 @@
       for more information.
       -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjckgBX1rkxIW7bYHtj_aV6jFYBqqZ34&callback=initialize&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARjckgBX1rkxIW7bYHtj_aV6jFYBqqZ34&callback=initPano&v=weekly"
       defer
     ></script>
   </body>
 </html>
-<!-- [END maps_streetview_embed] -->

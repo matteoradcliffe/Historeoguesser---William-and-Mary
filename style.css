@@ -1,211 +1,189 @@
-#map {
-  height: 100%;  /* Makes sure the map fills its parent container fully */
-  width: 100%;
-  position: relative;  /* Relative positioning allows buttons to be correctly placed on the map */
-}
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+ #map {
+    width: 100%; 
+    height: 100%;
+    z-index: 1;
+    
 
-/* Make the entire sample page fill the window */
-html, body {
+  }
+ #minimap {
+    width: 50%; 
+    height: 50%;
+    bottom: 50%;
+    left: 50%;
+    z-index: 2;
+    border: 7px solid rgb(220, 220, 220, 0.8); 
+    border-style: groove;
+
+
+ }
+  /* 
+   * Optional: Makes the sample page fill the window. 
+   */
+   html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling when using full-page elements */
+    font-family: Arial, sans-serif;  /* Adding a global font style */
+  }
+  
+
+  
+  
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #street-view {
+    height: 100%;  
+    position: relative;
+  } 
+  button {
+    width: 100px;
+    height: 25px;
+    color: white;
+    background-color: red;
+  }
+  
+  img {
+  padding-top: 10px;
+  }
+  
+  #street-view {
   height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Prevent scrolling when using full-page elements */
-  font-family: Arial, sans-serif;  /* Adding a global font style */
-}
-
-/* Container for interactive hotspots over the map */
-.campus-map {
-  position: absolute;  /* Position the hotspots div over the map */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;  /* Allows interaction with Google Maps while buttons still work */
-}
-
-/* Styling for each interactive hotspot button */
-.hotspot {
-  position: absolute;
-  background-color: rgba(255, 0, 0, 0.7);  /* Semi-transparent red background */
-  color: white;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-  pointer-events: auto;  /* Allows buttons to be clickable */
-}
-
-/* Information box that pops up when a button is clicked */
-.info-box {
-  display: none;  /* Hidden by default, shown when a button is clicked */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border: 1px solid #ccc;
-  padding: 20px;
-  z-index: 1000;  /* Higher z-index to make sure it appears over other elements */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Button to close the information box */
-.info-box button {
-  margin-top: 10px;
-  cursor: pointer;
-} 
-
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-#street-view {
-  height: 100%;  
-  position: relative;
-} 
-button {
-  width: 100px;
-  height: 25px;
-  color: white;
-  background-color: red;
-}
-
-img {
-padding-top: 10px;
-}
-
-#street-view {
-height: 100%;
-}
-
-.floating-panel-flexbox { 
-  display: flex; 
-  position: absolute;  
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: row; 
-  top: 15px;
-  z-index: 5; 
-  text-align: center;
-  font-family: "Roboto", "sans-serif";
-  line-height: 30px;
-  width: 20vw;
-  height: 12vh;   
-  margin-left: 40vw; 
-}     
-
-.floating-panel { 
-  display: flex;
-  position: relative;  
-  align-items: center;  
-  justify-content: center;
-  flex-direction: row;
-  z-index: 5;  
-  background-color: rgb(255, 255, 255, 0.3); 
-  padding: 5px;
-  border: 3px solid rgb(220, 220, 220, 0.8); 
-  text-align: center;
-  font-family: "Roboto", "sans-serif";
-  width: 14vw;
-  height: 10vh; 
-  font-size: 0.8vw; 
-  border-radius: 30%; 
-}   
-
-.where-am-i { 
-  position: relative;  
-  z-index: 5;  
-  padding: 10px;  
-}
-
-.tj-image {   
-  position: relative; 
-  /* border: 3px solid #fff; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
-  width: 35px; 
-  height: auto; 
-  object-fit: cover; 
-  object-position: top; 
-  overflow: hidden;
-}  
-
-.score-flexbox {  
-  display: flex; 
-  position: absolute;  
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: row;  
-  top: 10px;
-  z-index: 5; 
-  text-align: center;
-  font-family: "Roboto", "sans-serif"; 
-  width: 10vw; 
-  margin-left: 1vw;  
-}  
-
-.title-flexbox {  
-  display: flex; 
-  position: absolute;  
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: row; 
-  width: 100%;
-
-} 
-
-.points-flexbox {  
-  display: flex; 
-  position: absolute;  
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: row;   
-  margin-top: 50%;  
-  width: 100%;
-
-}
-.floating-score {
-  position: relative;   
-  top: 0px;
-  z-index: 5;
-  background-color: rgb(255, 255, 255, 0.3); 
-  text-align: center;
-  font-family: "Roboto", "sans-serif"; 
-  border: 3px solid rgb(220, 220, 220, 0.8); 
-  line-height: 30px;
-  font-size: 0.8vw; 
-  border-radius: 30%;
-  font-size: 1.0vw; 
-  height: 20vh; 
-  width: 10vw;
-}
-#floating-score {
-  margin-left: -100px; 
-}  
-.fa-regular {    
-  width: 150%; 
-  height: 150%;
-}
-.poopass { 
-  width: 40vw;  
-  margin-right: 1vw;
-  height: 30px;
-  background-color: white;
-  background-color: rgb(255, 255, 255, 0.3); 
-}
-
-.img { 
-  position: absolute;
-  margin-top: 95px;
-  margin-left: -45px;
-} 
-
-
- 
-
-
-
-/* [END maps_streetview_embed] */
+  }
+  
+  .floating-panel-flexbox { 
+    display: flex; 
+    position: absolute;  
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: row; 
+    top: 15px;
+    z-index: 5; 
+    text-align: center;
+    font-family: "Roboto", "sans-serif";
+    line-height: 30px;
+    width: 20vw;
+    height: 12vh;   
+    margin-left: 40vw; 
+  }     
+  
+  .floating-panel { 
+    display: flex;
+    position: relative;  
+    align-items: center;  
+    justify-content: center;
+    flex-direction: row;
+    z-index: 5;  
+    background-color: rgb(255, 255, 255, 0.3); 
+    padding: 5px;
+    border: 3px solid rgb(220, 220, 220, 0.8); 
+    text-align: center;
+    font-family: "Roboto", "sans-serif";
+    width: 14vw;
+    height: 10vh; 
+    font-size: 0.8vw; 
+    border-radius: 30%; 
+  }   
+  
+  .where-am-i { 
+    position: relative;  
+    z-index: 5;  
+    padding: 10px;  
+  }
+  
+  .tj-image {   
+    position: relative; 
+    /* border: 3px solid #fff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+    width: 35px; 
+    height: auto; 
+    object-fit: cover; 
+    object-position: top; 
+    overflow: hidden;
+  }  
+  
+  .score-flexbox {  
+    display: flex; 
+    position: absolute;  
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: row;  
+    top: 10px;
+    z-index: 5; 
+    text-align: center;
+    font-family: "Roboto", "sans-serif"; 
+    width: 10vw; 
+    margin-left: 1vw;  
+  }  
+  
+  .title-flexbox {  
+    display: flex; 
+    position: absolute;  
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: row; 
+    width: 100%;
+  
+  } 
+  
+  .points-flexbox {  
+    display: flex; 
+    position: absolute;  
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: row;   
+    margin-top: 50%;  
+    width: 100%;
+  
+  }
+  .floating-score {
+    position: relative;   
+    top: 0px;
+    z-index: 5;
+    background-color: rgb(255, 255, 255, 0.3); 
+    text-align: center;
+    font-family: "Roboto", "sans-serif"; 
+    border: 3px solid rgb(220, 220, 220, 0.8); 
+    line-height: 30px;
+    font-size: 0.8vw; 
+    border-radius: 30%;
+    font-size: 1.0vw; 
+    height: 20vh; 
+    width: 10vw;
+  }
+  #floating-score {
+    margin-left: -100px; 
+  }  
+  .fa-regular {    
+    width: 150%; 
+    height: 150%;
+  }
+  .poopass { 
+    width: 40vw;  
+    margin-right: 1vw;
+    height: 30px;
+    background-color: white;
+    background-color: rgb(255, 255, 255, 0.3); 
+  }
+  
+  .img { 
+    position: absolute;
+    margin-top: 95px;
+    margin-left: -45px;
+  } 
+  
+  
+   
+  
+  
+  
+  /* [END maps_streetview_embed] */

@@ -11,26 +11,26 @@
 
     <div class="floating-panel-flexbox">   
         <div class="floating-panel">
-          <div class="where-am-i"><h1>Where am I?</h1></div>  
+          <div class="where-am-i" id="uh"><h1>Where am I?</h1></div>  
           <div class="image-box">
             <img class="tj-image" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29.jpg"> 
           </div>
         </div> 
       </div>  
       
-
-
       <div class="score-flexbox">  
         <div class="floating-score">
           <div class="title-flexbox"> 
             <div class="score"><h1> Score:</h1></div> 
           </div>  
-          <div class="points-flexbox">  
-            <i class="fa-regular fa-star"></i>
+          <div class="points-flexbox"> 
+            <button class="click-me" id=guess> Click Me </button>    
             <div class="poopass"> </div>
           </div>
         </div> 
-      </div>
+      </div> 
+
+    <div class="click-me"><button class="guess"> Guess </button></div>
 
 
     <script
@@ -41,4 +41,3 @@
         ({key: "AIzaSyARjckgBX1rkxIW7bYHtj_aV6jFYBqqZ34", v: "weekly"});</script>
   </body>
 </html>
-

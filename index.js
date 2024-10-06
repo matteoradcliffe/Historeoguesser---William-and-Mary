@@ -167,7 +167,7 @@ function initialize() {
 
   document.getElementById("myCheckbox").addEventListener("change", function() {
     if (this.checked) {
-      reveal_location(); // Call function to reveal location when checkbox is checked
+      guess(); // Call function to reveal location when checkbox is checked
     }
   });  
 }
@@ -198,7 +198,7 @@ function reveal_location() {
 function guess() {
   reveal_location(); // Reveal the random location
   var score = Math.round(calculate_distance()); // Calculate distance
-  document.getElementById("distance-value").innerText = score; // Display distance in the placeholder 
+  document.getElementById("distance-value").innerText = `${score} meter(s)`; // Display distance in the placeholder 
 }
 
 function randomize_location() {

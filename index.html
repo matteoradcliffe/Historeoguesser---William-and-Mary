@@ -22,25 +22,31 @@
     </div>   
 
     <div class="guess-flexbox"> 
-      <input type="checkbox" id="myCheckbox" class="checkbox" hidden> <!-- Checkbox -->
+      <input type="checkbox" id="myCheckbox" class="checkbox" hidden disabled> <!-- Checkbox -->
       <label for="myCheckbox" id="custom-checkbox"></label> 
-      <button class="guess translateCheckbox"> Guess </button> <!-- Button to move -->    
-      <div class="description-flexbox">  
-        <!-- <div class="distance-display">
-          <span>Distance: </span>
-          <span></span> meter
-        </div> -->
-        <h1 class="description-text"> </h1>  
+      <button class="guess translateCheckbox" id="translateCheckbox" class="hidden" hidden disabled> Guess </button>   
+      <div class="preguess-message"><h1 class="preguess-message" id="preguess-message"> Place a marker on the map to make a guess!</h1></div>   
+      <button id="next-location-btn" hidden><h1 class="next-location"> Next Location </h1></button>
+      <div class="distance-display"> 
+        <span id="distance-value"></span> 
+      </div>
+      <div class="description-flexbox">   
+        <div class="description-title-flexbox">  
+          <div id="correct-answer"> </div> 
+        </div>
+        <div class="poi-description-flexbox"> 
+          <h2 id="poi-description"></h2> 
+        </div>
       </div>   
     </div>
       
       <div class="score-flexbox">  
         <div class="floating-score">
           <div class="title-flexbox"> 
-            <div class="score-title"><h1> Score:</h1></div> 
+            <div class="score-title"><h1> Your Guess Was:</h1></div> 
           </div>  
-          <div class="points-flexbox" >  
-            <div class="poopass" id="distance-value"> </div>
+          <div class="points-flexbox">  
+            <div class="poopass"><h1 class="meters-away"> Meters Away!</h1></div>
           </div> 
         </div> 
       </div> 

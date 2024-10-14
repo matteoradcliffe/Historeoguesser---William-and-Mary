@@ -20,12 +20,10 @@
 } 
 
 #minimap:hover { 
-  transform: translate(-405px, -335px);
+  transform: translate(-26vw, -47vh);
 } 
 .hidden {
-  visibility: hidden; /* Make the element invisible */
-  opacity: 0; /* Fully transparent */
-  transition: visibility 0s 0.5s, opacity 0.5s linear; /* Delay visibility change */
+  visibility: hidden;
 } 
 .visible {
   visibility: visible; /* Make the element visible */
@@ -33,176 +31,177 @@
   transition: opacity 0.5s linear; /* Smooth opacity transition */
 }   
 #preguess-message {  
-  margin-right: 14vw;
+  margin-right: 0vw;
   margin-top: 2vw; 
   color: red;   
   width: 20vw; 
   text-align: center; 
   font-size: 1.5vw;  
-  font-weight: 1000;
+  font-weight: 1000; 
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
 } 
 .guess-flexbox {  
   display: flex; 
   position: absolute;  
   align-items: center; 
-  justify-content: center; 
-  flex-direction: row;   
-  height: 20px; 
-  width: 20vw;  
-  /* border: 1px solid black;  */
-  margin-top: -154vh; 
-  z-index: 10; 
-  margin-left: 96vh;
-}  
+  justify-content: flex-start;  
+  flex-direction: column;   
+  height: 20vh; 
+  width: 10vw;  
+  /* border: 3px solid black; */
+  z-index: 10;  
+  left: 50%;  
+  transform: translateX(-50%);
+  top: 16vh;
+}   
+.guess-flexbox button {  
+  display: block; 
+  margin: 0;
+
+}
 .guess-button {  /* actual button */
+  display: flex;
+  justify-content: center; /* Centers the button horizontally within the div */ 
+  margin-top: 0vh; 
+  position: absolute;  
+}     
+.guess-button-text{ /* text on the button */
+  font-size: 2.5vw;  
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */ 
+}     
+#custom-checkbox {
+  display: inline-block;
+  height: 7vh;  
+  width: 9vw;  /* Background color of the custom checkbox */
+  border-radius: 5px;       /* Optional: rounded corners */
+  cursor: pointer;          /* Makes the label clickable */
+  position: relative;       /* Needed for the checkmark positioning */  
+  z-index: 100; 
+} 
+#translateCheckbox {   /* actual button */ 
   position: absolute;
-  height: 100px; 
-  width: 100px; 
-  background-color: red; 
-  z-index: 10; 
-  margin-left: 5rem; 
-  margin-bottom: -10vh;
-}   
-.guess { /* text on the button */
-  margin-left: 10vw; 
-  font-size: 2.5vw;
-}   
-#translateCheckbox {   /* actual button */
+  margin-left: 5vw;
   height: 7vh; 
-  width: 9vw; 
+  width: 10vw; 
   color: white; 
   background-color: red;  
-  transition: background-color 0.7s; 
+  margin: 0; 
+  border-radius: 0.5vw;
 } 
 #translateCheckbox:disabled { 
   background-color: #d6d6d6; /* Color when disabled */
   color: #a1a1a1; /* Text color when disabled */
   cursor: not-allowed; /* Change cursor to not-allowed */
-}
-/* .checkbox { 
-  margin-left: 5rem; 
-  z-index: 10000; 
-  width: 200px; 
-  transform: scale(1); 
-  z-index: 100000;
-}  */
-#custom-checkbox { /* checkbox to move location/description */
-  position: absolute;
-  height: 7vh; 
-  width: 9vw;
-  border: 2px solid #000; /* Border styling */
-  border-radius: 5px; /* Optional: round corners */
-  background-color: #fff; /* Background color */
-  margin-right: 7vw;
+}   
+#next-location-btn {   
   position: relative;
-  cursor: pointer; /* Change cursor to pointer on hover */ 
-  z-index: 100000; 
-  transform: scale(1);  
-  opacity: 0;
+  height: 7vh; 
+  width: 10vw; 
+  z-index: 10; 
+  margin-top: 1vh; 
+  border-radius: 0.5vw;  
 }  
-
-/* #custom-checkbox:checked ~ .box {
-  transform: translateY(50px); /* Move the element down by 50px 
-}  /*
-/* 
- * Optional: Makes the sample page fill the window. 
- */ 
+.next-location {  
+  font-size: 3vw; 
+  font-weight: 550;
+  align-items: center; 
+  justify-content: center; 
+}
 
 .description-flexbox { /* correct location pops up once guess is made */  
   display: flex; 
-  position: absolute;  
+  position: absolute;   
   align-items: center; 
-  justify-content: center; 
   flex-direction: column; 
   transition: transform 1s ease;  
   background-color: rgb(255, 255, 255, 0.7); 
   border-radius: 10%;
-  position: absolute;  
   border: 3px solid rgb(250, 250, 250, 0.6);
-  margin-left: -50vw; 
-  margin-top: 220vh; 
   height: 55vh; 
-  width: 50vw; 
-}   
+  width: 50vw;  
+  margin-top: 84vh; 
+  margin-right: 40vw; 
+  /* border: 5px solid purple ; */
+}    
+.description-flexbox.translate {
+  transform: translateY(-60vh); 
+}
 .poi-description-flexbox { 
   display: flex; 
-  position: absolute;  
+  position: relative;  
   align-items: center; 
   justify-content: center; 
-  flex-direction: column;   
-  width: 50vw;  
-  /* border: 2px solid black;    */
-  margin-top: 12vh; 
-  height: 33vh;
+  flex-direction: column;    
+  /* border: 2px solid red;    */
+  width: 100%;  
+  height: auto; 
+  margin-top: 0vh;
  }
 #poi-description {  
-  margin-top: auto; 
-  padding: 25px; 
+  padding-right: 1.7vw;   
+  padding-left: 1.7vw; 
+  padding-top: 0;
+  align-items: flex-start; 
   text-align: center; 
-  font-size: 2vw;
+  font-size: 1.9vw; 
+  margin-top: 0vh;  
 }
-.distance-display {  
-  position: absolute;
-  height: 4vh;
-  width: 8vw;  
+/* .distance-display {  
+  position: relative;
+  height: 8vh;
+  width: 100%;  
   align-items: center; 
   text-align: center; 
   justify-content: center;
-  font-size: 5vw; /* Size of the text */
-  color: #333; /* Text color */
+  font-size: 5vw; 
+  color: #333; 
   font-weight: bold;
-  margin-bottom: 0vw;
-  padding: 10px;
-  margin-right: 90vw; 
-  margin-top: -1vh; 
-}  
+  margin: 0;
+}    */
 .description-title-flexbox {  
   display: flex;
-  position: absolute;   
-  align-items: center; 
+  position: relative;   
+  align-items: center;  
   justify-content: center;
-  top: 0;
   /* border: 2px solid black;   */
-  height: 100px; 
-  width: 47vw; 
-  margin-top: 0vh; 
-  margin-bottom: 3vh;
+  height: 10vh; 
+  width: 100%;  
+  margin-top: 1vh;
 } 
 #correct-answer { 
   font-size: 2.5vw; 
   text-align: center;
 }
 
-#distance-value {
-  color: #ff0000; /* Highlight the distance in red */
-  font-size: 3vw; /* Make the distance value larger */
+#distance-value { 
+  color: #ff0000; 
+  font-size: 3vw;  
+  font-weight: 500;
+  z-index: 10; 
+  text-align: center;    
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
 } 
 .translate {
-  transform: translateY(20px); /* Adjust the value as needed for vertical translation */
-  transition: transform 0.5s ease; /* Smooth transition effect */
+  transform: translateX(200px);   
+  transition: transform 0.5s ease; 
 }
-.description-text { 
+/* .description-text { 
   font-size: 1vw; 
-  padding: 15px;
-} 
+  padding: 15px;  
+}    */
 
 /* Translate the element when checkbox is checked */
 #myCheckbox:checked ~ .description-flexbox {
   transform: translateY(-60vh); /* Adjust the value for how far you want it to move */
-}  
-#next-location-btn {   
-  position: absolute;
-  height: 7vh; 
-  width: 10vw; 
-  z-index: 10000; 
-  margin-right: 7vw; 
-  margin-top: 17vh;
-} 
-.next-location { 
-  font-size: 1.3vw; 
-}
+}   
 
- html, body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -274,7 +273,11 @@ height: 100%;
   position: relative;  
   z-index: 5;  
   padding: 10px;   
-  font-size: 1.3vw;
+  font-size: 1.3vw; 
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  
 }
 
 /* .tj-image {   
@@ -302,28 +305,31 @@ height: 100%;
   font-family: "Roboto", "sans-serif"; 
   width: 15vw;  
   height: 30vh;
-  margin-left: 1vw;   
-  /* border: 5px solid black; */
+  margin-left: 1vw;     
+
+  /* border: 4px solid red; */
 }  
 .title-flexbox {  
   display: flex; 
-  position: absolute;  
+  position: relative;  
   align-items: center; 
   justify-content: center; 
   flex-direction: row; 
-  width: 100%;
+  width: 100%; 
+  /* border: 2px solid blue;  */
+  height: 8vh; 
+  margin-top: 2vh;
 
 } 
 .points-flexbox {  
   display: flex; 
-  position: absolute;  
+  position: relative;
   align-items: center; 
   justify-content: center; 
-  flex-direction: row;   
-  margin-top: 50%;  
+  flex-direction: column;   
+  margin-top: 0vh;  
   width: 100%; 
-  height: 7vh;
-
+  height: 10vh;  
 }
 .floating-score {
   position: relative;   
@@ -342,18 +348,37 @@ height: 100%;
 }
 .score-title { 
   font-size: 0.8vw; 
-  margin-top: 3vh;
+  margin-top: 0vh; 
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
 }
-.poopass {   /* score display box */
+.poopass {    
+  align-content: center; 
+  justify-content: center;
   height: 8vh;
   width: 10vw; 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  background-color: rgb(255, 255, 255, 0.3);  
-  margin-bottom: 5vh;
-} 
-.meters-away { 
-  font-size: 1.5vw; 
-  margin-top: 9vh;
+  background-color: rgb(255, 255, 255, 0.3);   
+}  
+.meters-away-flexbox { 
+  display: flex; 
+  position: relative; 
+  align-items: center;  
+  justify-content: center; 
+  width: 100%;   
+
+}
+.meters-away {  
+  align-items: center; 
+  font-size: 0.8vw; 
+  margin-top: 0vh; 
+  text-align: center;  
+  width: 100%;  
+  height: 100%; 
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
 }
 
 .checkbox-flexbox{ 
@@ -371,25 +396,19 @@ height: 100%;
   position: absolute;  
   margin-left: -7rem; /* Adjust as needed */
   transition: transform 0.3s; /* Smooth transition */
-} 
+}  
+/* [END maps_streetview_embed] */ 
+
+@media (max-width: 2560px) { 
+  #poi-description {  
+    line-height: 1.3;  
+  }    
+  .next-location { 
+    font-size: 1.3vw; 
+    transform:  scaleY(1);
+  }
 
 
 
-.box { 
-  font-size: 3rem; 
-  color: red; 
-  margin-left: 10rem; 
-  transition: transform 0.3s;
+}
 
-
-} 
-
-#myCheckbox:checked ~ .box {
-  transform: translateY(50px); /* Move the element down by 50px */
-} 
-
- 
-
-
-
-/* [END maps_streetview_embed] */

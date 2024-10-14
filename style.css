@@ -138,7 +138,7 @@
   flex-direction: column;    
   /* border: 2px solid red;    */
   width: 100%;  
-  height: auto; 
+  height: 100%; 
   margin-top: 0vh;
  }
 #poi-description {  
@@ -148,7 +148,8 @@
   align-items: flex-start; 
   text-align: center; 
   font-size: 1.9vw; 
-  margin-top: 0vh;   
+  margin-top: 0vh;    
+  /* border: 2px solid black; */
 }
 /* .distance-display {  
   position: relative;
@@ -170,7 +171,7 @@
   /* border: 2px solid black;   */
   height: 10vh; 
   width: 100%;  
-  margin-top: 1vh;
+  margin-top: 3vh;
 } 
 #correct-answer { 
   font-size: 2.5vw; 

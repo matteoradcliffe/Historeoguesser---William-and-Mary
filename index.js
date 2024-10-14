@@ -100,7 +100,93 @@ const poi_list =  [
     "name": "School of Education", 
     "desc": "Established in 1961, the School of Education became a distinct entity at William & Mary. The current building, completed in 2010, centralizes the school's operations, which have included both undergraduate teacher education and various graduate programs since its inception.",
     "coords": { "lat": 37.2785785, "lng": -76.7238843 }
-  }    
+  }, 
+  
+  { 
+    "name": "Sunken Garden", 
+    "desc": "The Sunken Garden extends west from the Wren Building and serves as a place for relaxation and recreation. Its design follows the spirit of eighteenth-century English landscape gardens, which abandoned the geometric parterres of Europe in favor of sweeping lawns intended to uplift the spirit by leading the eye toward a distant, natural setting.",
+    "coords": { "lat": 37.27082877, "lng": -76.71144537 }
+  }, 
+
+  { 
+    "name": "James Blair Hall", 
+    "desc": "James Blair Hall, known as Marshall-Wythe Hall until 1968, is located on the west end of the Sunken Gardens. It currently houses the Philosophy and History departments as well as some administrative offices. The building is named after James Blair, founder and first President of William & Mary from 1693-1743.",
+    "coords": { "lat": 37.27168771, "lng": -76.7118584}
+  }, 
+
+  { 
+    "name" : "Chancellors Hall", 
+    "desc" : " Chancellors Hall, located on the Sunken Gardens between James Blair Hall and Tucker Hall, was formerly named Rogers Hall, Chancellors Hall, then Tyler Hall in 1988 after U.S. President John Tyler and his son, Lyon Gardiner Tyler Sr. In 2021, the Board of Visitor’s approved reverting Tyler Hall back to its previous name of Chancellors Hall. ", 
+    "coords": { "lat": 37.27168043, "lng": -76.71083538}
+  },   
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  },  
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  },  
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+    //  { 
+    //   "name" : "", 
+    //   "desc" : " ", 
+    //   "coords": { "lat": , "lng": }
+    //  }, 
+
+
 ]
 
 
@@ -166,31 +252,130 @@ function initialize() {
 
   map.addListener("click", (mapsMouseEvent) => {
       marker.setMap(null);
-      guess_location = mapsMouseEvent.latLng;
+      guess_location = mapsMouseEvent.latLng;  
       marker = new AdvancedMarkerElement({
           map,
-          position: mapsMouseEvent.latLng
+          position: mapsMouseEvent.latLng, 
       });   
-      markers.push(marker); 
+      markers.push(marker);  
+
       
       const checkbox = document.getElementById("myCheckbox");
       const label = document.getElementById("custom-checkbox");
       const guessButton = document.getElementById("translateCheckbox");  
-      const message = document.getElementById("preguess-message"); 
+      // const message = document.getElementById("preguess-message");  
+      // const location = document.getElementById("next-location-btn");
 
       checkbox.disabled = false;
       label.disabled = false;
-      guessButton.removeAttribute("hidden");
+      // guessButton.removeAttribute("hidden");
       guessButton.disabled = false; 
-      message.style.display = "none"; 
+      // message.style.display = "none";  
+      // location.setAttribute("hidden", true)
   });
 
   document.getElementById("myCheckbox").addEventListener("change", function() {
+    const descriptionFlexbox = document.querySelector(".description-flexbox"); 
+    const nextLocationButton = document.getElementById("next-location-btn"); 
+    // const DistanceValue = document.getElementById("distance-value");   
+    const Score = document.getElementById("score-flexbox")
+
+  
     if (this.checked) { 
-      guess(); // Call function to reveal location when checkbox is checked
-    }
+      guess(); // Call function to reveal location when checkbox is checked 
+      disableMap(); // Disable the map 
+
+      descriptionFlexbox.classList.add("translate"); 
+      descriptionFlexbox.hidden = false;  
+
+      nextLocationButton.removeAttribute("hidden");  
+      nextLocationButton.classList.remove("hidden"); 
+      nextLocationButton.hidden = false;
+
+    } 
   });    
+} 
+
+function resetGame() {
+  clear_markers(); // Clear current guess and revealed markers
+  randomize_location(); // Get a new random location
+  enableMap(); 
+
+
+  // Reset UI elements
+  const checkbox = document.getElementById("myCheckbox");
+  const label = document.getElementById("custom-checkbox");
+  const guessButton = document.getElementById("translateCheckbox");
+  const message = document.getElementById("preguess-message");
+  const distanceValue = document.getElementById("distance-value");
+  const nextLocationBtn = document.getElementById("next-location-btn");
+  const descriptionBox = document.querySelector(".description-flexbox");
+
+  // Reset the checkbox and button states
+  checkbox.checked = false;
+  checkbox.disabled = true;
+  label.disabled = true;
+  guessButton.hidden = true;
+  guessButton.disabled = true;
+  nextLocationBtn.hidden = true;
+  distanceValue.innerText = ""; // Clear the distance display
+
+  // Re-show the description box and prepare for the next guess 
+  descriptionBox.hidden = false;
+  // descriptionBox.classList.remove("hidden"); 
+  descriptionBox.classList.remove("translate");  
+
+  // Reinitialize the Street View with the new location
+  let panorama = new google.maps.StreetViewPanorama(
+    document.getElementById("map"),
+    {
+      position: random_location,
+      linksControl: false,
+      panControl: true,
+      enableCloseButton: false,
+      fullscreenControl: false,
+      addressControl: false,
+      showRoadLabels: false,
+      clickToGo: false,
+      zoomControl: false,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.TOP_LEFT,
+      },
+    }
+  );
+  
+  rndmarker.setMap(null); // Hide the previous random location marker
 }
+
+
+document.getElementById("myCheckbox").addEventListener("change", function() {
+  const descriptionFlexbox = document.querySelector(".description-flexbox"); 
+  const nextLocationButton = document.getElementById("next-location-btn");
+
+  if (this.checked) { 
+    guess(); // Call function to reveal location when checkbox is checked 
+    disableMap(); // Disable the map 
+
+    // Move the description flexbox down
+    descriptionFlexbox.classList.add("translate"); // Add the translation class  
+    descriptionFlexbox.classList.remove("hidden");
+
+    nextLocationButton.removeAttribute("hidden");  // Remove the 'hidden' attribute
+    nextLocationButton.classList.remove("hidden"); 
+    nextLocationButton.hidden = false;
+
+  }  
+});
+
+// Add event listener to the Next Location button
+document.getElementById("next-location-btn").addEventListener("click", function () {
+  resetGame(); // Call the reset game function
+  this.classList.add("hidden"); // Hide the 'Next Location' button after reset
+
+  const descriptionBox = document.querySelector(".description-flexbox");
+  descriptionBox.classList.add("hidden"); 
+});
+
 
 // Function to calculate the distance between guess and actual location
 function calculate_distance() {
@@ -203,7 +388,7 @@ function calculate_distance() {
   var dLng = (40075 * Math.cos(randomLat * Math.PI / 180) / 360) * (randomLng - guessLng); 
   var distance = 1000 * (Math.sqrt(Math.pow(dLat, 2) + Math.pow(dLng, 2))); 
 
-  if (distance > 1000) {
+  if (distance > 3000) {
       return "WTF"; 
   } else {
       return distance;
@@ -218,10 +403,14 @@ function clear_markers() {
   markers = [];
 }
 
-// Reveal the random location on the map
+// Assuming rndmarker is your correct location marker
+let isCorrectMarker = false; // This will track if the rndmarker is the correct one
+
 function reveal_location() {
-  rndmarker.setMap(map); // Now we set the map for rndmarker
+    rndmarker.setMap(map); // Show the random marker on the map
 }
+
+
 
 // Guess function to reveal location and calculate distance
 function guess() {
@@ -245,54 +434,7 @@ function guess() {
   nextLocationBtn.removeAttribute("hidden"); // Show the button
 }
 
-// Reset the game and move to the next location
-function resetGame() {
-  clear_markers(); // Clear current guess and revealed markers
-  randomize_location(); // Get a new random location
 
-  // Reset UI elements
-  const checkbox = document.getElementById("myCheckbox");
-  const label = document.getElementById("custom-checkbox");
-  const guessButton = document.getElementById("translateCheckbox");
-  const message = document.getElementById("preguess-message");
-  const distanceValue = document.getElementById("distance-value");
-  
-  // Reset the checkbox and button states
-  checkbox.checked = false;
-  checkbox.disabled = true;
-  label.disabled = true;
-  guessButton.hidden = true;
-  guessButton.disabled = true;
-  message.style.display = "block"; // Show preguess message
-  distanceValue.innerText = ""; // Clear the distance display
-
-  // Reinitialize the Street View with the new location
-  let panorama = new google.maps.StreetViewPanorama(
-      document.getElementById("map"),
-        {  
-          position: random_location,
-          linksControl: false,
-          panControl: true,
-          enableCloseButton: false,
-          fullscreenControl: false,
-          addressControl: false,
-          showRoadLabels: false,
-          clickToGo: false,
-          zoomControl: false,
-          zoomControlOptions: {
-              position: google.maps.ControlPosition.TOP_LEFT,
-          }
-        }
-  );
-  
-  rndmarker.setMap(null); // Hide the previous random location marker
-}
-
-// Add event listener to the Next Location button
-document.getElementById("next-location-btn").addEventListener("click", function() {
-  resetGame(); // Call the reset game function
-  this.hidden = true; // Hide the button after clicking
-});
 
 // Randomize the POI location and set the global variables
 function randomize_location() {
@@ -307,8 +449,49 @@ function randomize_location() {
   // Update the description and correct answer in HTML
   document.getElementById("poi-description").innerText = random_desc;
   document.getElementById("correct-answer").innerText = "Location: " + random_name;
-}
+} 
+
+function disableMap() {
+  map.setOptions({
+      draggable: true, // Disable dragging
+      disableDefaultUI: true, // Disable default UI elements (optional) 
+      zoomControl: true, // Enable zoom control
+      scrollwheel: true, // Allow zooming with scrollwheel
+      gestureHandling: "auto" // Allow zooming with gestures (like pinch zoom on touch devices)
+  });
+
+  // Optionally, remove the click listener to prevent adding markers
+  google.maps.event.clearListeners(map, 'click');
+} 
+
+function enableMap() {
+  map.setOptions({
+    draggable: true, // Enable dragging
+    disableDefaultUI: false // Enable default UI elements (optional)
+  }); 
+
+  map.addListener("click", (mapsMouseEvent) => {
+    marker.setMap(null);
+    guess_location = mapsMouseEvent.latLng;
+    marker = new AdvancedMarkerElement({
+        map,
+        position: mapsMouseEvent.latLng
+    });   
+    markers.push(marker); 
+    
+    const checkbox = document.getElementById("myCheckbox");
+    const label = document.getElementById("custom-checkbox");
+    const guessButton = document.getElementById("translateCheckbox");  
+    const message = document.getElementById("preguess-message"); 
+
+    checkbox.disabled = false;
+    label.disabled = false;
+    guessButton.removeAttribute("hidden");
+    guessButton.disabled = false; 
+    message.style.display = "none"; 
+});
+} // Close the enableMap function
+
+
 
 initialize();
-
-
